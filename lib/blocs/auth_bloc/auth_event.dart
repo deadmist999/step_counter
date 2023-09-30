@@ -5,12 +5,10 @@ abstract class AuthEvent {}
 class CheckAuthEvent extends AuthEvent {}
 
 class SignUpByEmailAndPasswordEvent extends AuthEvent {
-  final String name;
   final String email;
   final String password;
 
   SignUpByEmailAndPasswordEvent({
-    required this.name,
     required this.email,
     required this.password,
   });
