@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         ),
         home: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
+            context.read<AuthBloc>().add(CheckAuthEvent());
             if(state is AuthorizedUserState) {
               return const HomeScreen();
             }
