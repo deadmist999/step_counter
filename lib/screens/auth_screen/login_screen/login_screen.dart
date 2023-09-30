@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:step_counter/blocs/auth_bloc/auth_bloc.dart';
 import 'package:step_counter/screens/auth_screen/components/custom_text_form_field.dart';
+import 'package:step_counter/screens/components/loading_indicator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -52,17 +57,48 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
           ),
-          FilledButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {}
+          BlocConsumer<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is AuthorizedUserState) {
+                Fluttertoast.showToast(
+                  msg: 'Successful',
+                  backgroundColor: Colors.green,
+                );
+              } else if (state is AuthErrorState) {
+                _passwordController.clear();
+                Fluttertoast.showToast(
+                  msg: 'Failure',
+                  backgroundColor: Colors.red,
+                );
+              }
             },
-            child: const Text(
-              'Login',
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text('Register'),
+            builder: (context, state) {
+              if (state is AuthLoadingState) {
+                return const LoadingIndicator();
+              }
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FilledButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(
+                              SignInByEmailAndPasswordEvent(
+                                _emailController.text,
+                                _passwordController.text,
+                              ),
+                            );
+                      }
+                    },
+                    child: const Text('Sign In'),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text('Sign Up'),
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),
