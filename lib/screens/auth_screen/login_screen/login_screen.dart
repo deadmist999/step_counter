@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:step_counter/blocs/auth_bloc/auth_bloc.dart';
 import 'package:step_counter/screens/auth_screen/components/custom_text_form_field.dart';
+import 'package:step_counter/screens/auth_screen/register_screen/register_screen.dart';
 import 'package:step_counter/screens/components/loading_indicator.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -93,7 +95,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text('Sign In'),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const RegisterScreen(),
+                      ),
+                    ),
                     child: const Text('Sign Up'),
                   ),
                 ],
