@@ -1,6 +1,6 @@
 # step_counter
 
-"A new Flutter project."
+"development duration: 6h"
 
 ## Getting Started
 
