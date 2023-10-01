@@ -4,13 +4,11 @@
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+instruction for installing and starting the application on your android device
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ 1. open this link https://github.com/deadmist999/step_counter/blob/master/app-release.apk
+ 2. click "Download raw file"
+ 3. after downloading you should install this apk on your android device
+ 4. you need to launch this application and register
+ 5. provide access to your "Recognise Activities"
+ 6. success
