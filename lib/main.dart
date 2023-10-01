@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:step_counter/blocs/achievement_bloc/achievement_cubit.dart';
 import 'package:step_counter/blocs/auth_bloc/auth_bloc.dart';
+import 'package:step_counter/blocs/pedometer_cubit/pedometer_cubit.dart';
 import 'package:step_counter/screens/auth_screen/login_screen/login_screen.dart';
 import 'package:step_counter/screens/home_screen/home_screen.dart';
 import 'package:step_counter/services/auth_service.dart';
@@ -20,8 +22,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => AuthBloc(AuthService()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => AuthBloc(AuthService()),
+        ),
+        BlocProvider(
+          create: (_) => PedometerCubit(null),
+        ),
+        BlocProvider(
+          create: (_) => AchievementCubit(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -31,7 +43,7 @@ class MyApp extends StatelessWidget {
         home: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             context.read<AuthBloc>().add(CheckAuthEvent());
-            if(state is AuthorizedUserState) {
+            if (state is AuthorizedUserState) {
               return const HomeScreen();
             }
             return const LoginScreen();
