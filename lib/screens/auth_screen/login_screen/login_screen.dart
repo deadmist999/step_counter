@@ -61,12 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
-              if (state is AuthorizedUserState) {
-                Fluttertoast.showToast(
-                  msg: 'Successful',
-                  backgroundColor: Colors.green,
-                );
-              } else if (state is AuthErrorState) {
+              if (state is AuthErrorState) {
                 _passwordController.clear();
                 Fluttertoast.showToast(
                   msg: 'Failure',

@@ -86,8 +86,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 listener: (contest, state) {
                   if (state is AuthorizedUserState) {
                     _navigateToHomeScreen();
-                    Fluttertoast.showToast(
-                        msg: 'Successful', backgroundColor: Colors.green);
                   } else if (state is AuthErrorState) {
                     Fluttertoast.showToast(
                         msg: state.message, backgroundColor: Colors.red);
